@@ -41,13 +41,15 @@ module.exports = {
     JwtService.verify(token, function(err, decoded){
       if (err) return ResponseService.json(401, res, "Invalid Token!");
       req.token = token;
-      User.findOne({id: decoded.id}).then(function(user){
-        req.current_user = user;
-        let responseData = {
-          user: user
-        };
-        return ResponseService.json(200, res, "Authorized", responseData)
-      })
+      User.findOne({id: decoded.id})
+        .populate('roles')
+        .then(function(user){
+          req.current_user = user;
+          let responseData = {
+            user: user
+          };
+          return ResponseService.json(200, res, "Authorized", responseData)
+        })
     });
   }
 

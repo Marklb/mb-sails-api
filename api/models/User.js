@@ -11,22 +11,26 @@ module.exports = {
 
   attributes: {
     username: {
-      type: "string",
+      type: 'string',
       minLength: 1,
       required: true,
       unique: true
     },
     email: {
-      type: "email",
+      type: 'email',
       required: true,
       unique: true
     },
     password: {
-      type: "string",
+      type: 'string',
       minLength: 6,
       protected: true,
       required: true,
-      columnName: "passwordHash"
+      columnName: 'passwordHash'
+    },
+    roles: {
+      collection: 'role',
+      via: 'user'
     },
     toJSON: function() {
       var obj = this.toObject();

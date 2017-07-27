@@ -47,6 +47,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   'post /signup': 'UserController.create',
+  'post /user/addRole': 'UserController.addRole',
   'post /login': 'AuthController.login',
   'get /users': 'UserController.getUsers',
   'post /isAuthenticated': 'AuthController.isAuthenticated'
